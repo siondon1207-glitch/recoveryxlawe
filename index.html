@@ -1,23 +1,590 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LegalService",
+          "@id": "https://legal.reliabledone.com/#service",
+          "name": "대구개인회생변호사 법률 상담 지원 센터",
+          "image": "https://legal.reliabledone.com/images/main-logo.png",
+          "telephone": "053-123-4567",
+          "url": "https://legal.reliabledone.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "동대구로 386",
+            "addressLocality": "대구광역시 수성구 범어동",
+            "addressRegion": "대구",
+            "postalCode": "42012",
+            "addressCountry": "KR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "35.8595",
+            "longitude": "128.6253"
+          },
+          "priceRange": "$$"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://legal.reliabledone.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "대구개인회생변호사 선임 비용과 평균 수임료 금액은 얼마인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "대구지방법원 관할 사건의 경우, 대구개인회생변호사 평균 수임료 비용은 채무 규모와 채권자 수에 따라 다르게 산정됩니다. 일반적으로 채권자 5곳 기준 150만 원에서 250만 원 내외의 금액으로 책정되며, 송달료와 인지대 등 법원에 직접 납부하는 공과금은 별도로 추가됩니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "대구지방법원 개인회생 심사 기간과 금지명령 특징은 무엇인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "대구지방법원은 최근 보정 권고 절차가 타 법원에 비해 다소 꼼꼼하게 진행되는 경향이 있습니다. 금지명령은 신청서 접수 후 통상 1주일 이내에 결정되나, 최근 채무 발생 사유에 최근 채무 비중이 높거나 도박, 주식, 가상화폐 투자 비율이 높을 경우 기각되거나 심사가 까다로워질 수 있어 전문 대구개인회생변호사 조력을 통한 철저한 소명이 필수적입니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "소득이 적은 아르바이트나 프리랜서도 대구에서 개인회생 신청이 가능한가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "가능합니다. 정규직 급여 소득자뿐만 아니라 비정규직, 아르바이트, 일용직, 개인사업자, 프리랜서 등 고용 형태의 종류에 관계없이 매월 일정한 소득이 반복하여 발생함을 증빙할 수 있다면 누구나 대구개인회생변호사 상담을 통해 법원에 신청서를 제출할 수 있습니다."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #1e293b; 
+            --secondary-color: #b45309; 
+            --accent-color: #047857; 
+            --text-dark: #1e293b; 
+            --text-muted: #64748b; 
+            --bg-light: #fcfbfa; 
+            --bg-warm: #fcfaf7; 
+            --border-color: #e2e8f0;
+            --white: #ffffff;
+            --box-shadow: 0 4px 20px rgba(30, 41, 59, 0.05);
+            --transition: all 0.3s ease;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.8; font-size: 16px; word-break: keep-all; }
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+        
+        /* 헤더 */
+        header { background-color: var(--white); padding: 20px 0; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .header-wrap { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.4em; font-weight: 700; color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--secondary-color); }
+        nav a { text-decoration: none; color: var(--text-dark); margin-left: 20px; font-weight: 500; transition: var(--transition); }
+        nav a:hover { color: var(--secondary-color); }
+
+        /* 히어로 섹션 */
+        .hero { background: linear-gradient(135deg, var(--primary-color) 0%, #111827 100%); color: var(--white); padding: 90px 0 120px; text-align: center; position: relative; }
+        .hero h1 { font-size: 2.8em; margin-bottom: 24px; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; }
+        .hero h1 span { color: var(--secondary-color); }
+        .hero p { font-size: 1.25em; margin-bottom: 40px; font-weight: 300; color: #cbd5e1; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .hero-btn { background-color: var(--secondary-color); color: var(--white); padding: 18px 48px; font-size: 1.15em; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; transition: var(--transition); text-decoration: none; display: inline-block; box-shadow: 0 4px 14px rgba(180, 83, 9, 0.4); }
+        .hero-btn:hover { background-color: #d97706; transform: translateY(-2px); }
+
+        /* 계산기 및 상담 신청 폼 */
+        .interactive-section { margin-top: -60px; position: relative; z-index: 20; }
+        .calculator-box { background-color: var(--white); padding: 40px; border-radius: 12px; box-shadow: var(--box-shadow); border: 1px solid var(--border-color); }
+        .calculator-box h2 { color: var(--primary-color); text-align: center; margin-bottom: 8px; font-size: 1.8em; font-weight: 700; }
+        .calculator-box p.subtitle { text-align: center; margin-bottom: 35px; color: var(--text-muted); font-size: 1em; }
+        
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 30px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { margin-bottom: 8px; font-weight: 500; color: var(--primary-color); font-size: 0.95em; }
+        .form-group input, .form-group select { width: 100%; padding: 14px; border: 1px solid var(--border-color); border-radius: 6px; box-sizing: border-box; transition: var(--transition); font-size: 1em; background-color: #fafaf9; color: var(--text-dark); }
+        .form-group input:focus, .form-group select:focus { border-color: var(--secondary-color); outline: none; background-color: var(--white); box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.1); }
+        
+        .full-width { grid-column: span 2; }
+        .form-footer { text-align: center; margin-top: 25px; }
+        .submit-btn { background-color: var(--primary-color); color: var(--white); padding: 18px 60px; font-size: 1.2em; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; transition: var(--transition); width: 100%; max-width: 480px; box-shadow: 0 4px 12px rgba(30, 41, 59, 0.15); }
+        .submit-btn:hover { background-color: #0f172a; }
+
+        /* 실시간 계산 결과 영역 */
+        .calc-result-box { margin-top: 35px; padding: 30px; background-color: var(--bg-warm); border-radius: 8px; border: 1px dashed var(--secondary-color); display: none; }
+        .calc-result-box.active { display: block; }
+        .calc-result-title { font-size: 1.3em; font-weight: 700; color: var(--secondary-color); margin-bottom: 20px; text-align: center; }
+        .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; }
+        .result-item { background: var(--white); padding: 15px; border-radius: 6px; border: 1px solid var(--border-color); }
+        .result-item span { display: block; font-size: 0.85em; color: var(--text-muted); margin-bottom: 5px; }
+        .result-item strong { font-size: 1.25em; color: var(--primary-color); font-weight: 700; }
+
+        /* 컨텐츠 섹션 */
+        .content-section { padding: 80px 0; }
+        .content-section h2 { font-size: 2.2em; color: var(--primary-color); margin-bottom: 24px; font-weight: 700; position: relative; padding-bottom: 12px; }
+        .content-section h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background-color: var(--secondary-color); }
+        .content-section h3 { font-size: 1.5em; color: var(--secondary-color); margin-top: 45px; margin-bottom: 18px; font-weight: 700; }
+        .content-section h4 { font-size: 1.2em; color: var(--primary-color); margin-top: 30px; margin-bottom: 12px; font-weight: 700; }
+        .content-section p { margin-bottom: 20px; color: #334155; text-align: justify; }
+        
+        .legal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0; }
+        .legal-card { background-color: var(--white); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: var(--box-shadow); transition: var(--transition); }
+        .legal-card:hover { transform: translateY(-5px); border-color: var(--secondary-color); }
+        .legal-card h4 { margin-top: 0; color: var(--primary-color); font-size: 1.25em; margin-bottom: 15px; }
+        .legal-card p { font-size: 0.95em; color: var(--text-muted); margin-bottom: 0; }
+
+        /* 통계 및 시각화 데이터 테이블 */
+        .table-container { margin: 40px 0; background-color: var(--white); border-radius: 8px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--box-shadow); }
+        .table-title { background-color: var(--primary-color); color: var(--white); padding: 18px 24px; font-size: 1.1em; font-weight: 700; margin: 0; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 16px 24px; border-bottom: 1px solid var(--border-color); font-size: 0.95em; }
+        th { background-color: #f8fafc; font-weight: 700; color: var(--primary-color); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background-color: #fafaf9; }
+
+        /* 가상 차트 시각화 */
+        .chart-wrapper { background-color: var(--white); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color); margin: 40px 0; box-shadow: var(--box-shadow); }
+        .chart-title { font-size: 1.1em; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; text-align: center; }
+        .bar-chart { display: flex; flex-direction: column; gap: 15px; }
+        .chart-row { display: flex; align-items: center; }
+        .chart-label { width: 150px; font-size: 0.9em; font-weight: 500; }
+        .chart-bar-container { flex-grow: 1; background-color: #f1f5f9; height: 24px; border-radius: 4px; overflow: hidden; position: relative; }
+        .chart-bar { background: linear-gradient(90deg, var(--secondary-color) 0%, #f59e0b 100%); height: 100%; border-radius: 4px; transition: width 1s ease-in-out; }
+        .chart-value { position: absolute; right: 10px; top: 0; line-height: 24px; font-size: 0.85em; font-weight: 700; color: var(--primary-color); }
+
+        /* FAQ 스타일 */
+        .faq-container { margin-top: 50px; }
+        .faq-item { background-color: var(--white); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 16px; overflow: hidden; box-shadow: var(--box-shadow); transition: var(--transition); }
+        .faq-question { padding: 22px 30px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: var(--primary-color); font-size: 1.05em; background-color: var(--white); user-select: none; }
+        .faq-question-text { padding-right: 20px; }
+        .faq-icon { font-size: 0.85em; color: var(--secondary-color); transition: var(--transition); font-weight: normal; }
+        .faq-answer { display: none; padding: 22px 30px; border-top: 1px solid var(--border-color); background-color: var(--bg-warm); color: #334155; line-height: 1.8; font-size: 0.95em; }
+        .faq-item.active { border-color: var(--secondary-color); }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+        /* 외부 링크 섹션 */
+        .external-links-box { background-color: var(--white); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 60px; }
+        .external-links-box h4 { margin-top: 0; color: var(--primary-color); font-size: 1.1em; margin-bottom: 15px; }
+        .external-links-box ul { list-style-position: inside; }
+        .external-links-box li { margin-bottom: 10px; font-size: 0.95em; }
+        .external-links-box a { color: var(--secondary-color); text-decoration: none; font-weight: 500; }
+        .external-links-box a:hover { text-decoration: underline; }
+
+        /* 푸터 */
+        footer { background-color: var(--primary-color); color: #94a3b8; padding: 60px 0; font-size: 0.9em; border-top: 1px solid #334155; }
+        footer a { color: #cbd5e1; text-decoration: none; transition: var(--transition); }
+        footer a:hover { color: var(--secondary-color); }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; }
+        .footer-col h5 { color: var(--white); font-size: 1.1em; margin-bottom: 20px; font-weight: 700; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-bottom { border-top: 1px solid #334155; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; }
+
+        /* 반응형 */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.2em; }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .legal-grid { grid-template-columns: 1fr; }
+            .result-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-wrap">
+            <a href="/" class="logo">대구개인회생변호사 <span>법률 지원</span></a>
+            <nav>
+                <a href="#calculator">변제금 계산기</a>
+                <a href="#guide">회생 절차 안내</a>
+                <a href="#faq">자주 묻는 질문</a>
+            </nav>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <!-- 히어로 섹션 -->
+        <section class="hero">
+            <div class="container">
+                <h1>대구개인회생변호사 맞춤형 솔루션으로 <span>새로운 시작</span>을 동행합니다</h1>
+                <p>2026년 대구지방법원 실무 기준에 입각한 정확한 자격 분석과 최적의 수임 가격 제시. 감당하기 힘든 부채의 무게에서 벗어나십시오.</p>
+                <a href="#calculator" class="hero-btn">실시간 예상 변제금 계산하기</a>
+            </div>
+        </section>
+
+        <!-- 계산기 섹션 -->
+        <section class="container interactive-section" id="calculator">
+            <div class="calculator-box">
+                <h2>대구개인회생 무료 자격 진단기</h2>
+                <p class="subtitle">간단한 정보를 입력하시면 대구지방법원 실무 가이드라인 기준 예상 면책율과 월 변제금을 즉시 계산해 드립니다.</p>
+                
+                <form id="rehab-calculator-form" onsubmit="calculateRehab(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="calc-name">성함</label>
+                            <input type="text" id="calc-name" placeholder="이름을 입력하세요" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-phone">연락처</label>
+                            <input type="tel" id="calc-phone" placeholder="010-XXXX-XXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-region">대구 관할 지역 선택</label>
+                            <select id="calc-region" required>
+                                <option value="">지역을 선택하세요</option>
+                                <option value="수성구">대구 수성구</option>
+                                <option value="달서구">대구 달서구</option>
+                                <option value="북구">대구 북구</option>
+                                <option value="동구">대구 동구</option>
+                                <option value="서구">대구 서구</option>
+                                <option value="남구">대구 남구</option>
+                                <option value="중구">대구 중구</option>
+                                <option value="달성군">대구 달성군</option>
+                                <option value="군위군">대구 군위군</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-age">연령대 선택</label>
+                            <select id="calc-age" required>
+                                <option value="">연령대를 선택하세요</option>
+                                <option value="20대">20대 청년층</option>
+                                <option value="30대">30대 직장인</option>
+                                <option value="40대">40대 가장</option>
+                                <option value="50대">50대 중장년</option>
+                                <option value="60대">60대 이상 장년층</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-income">월 평균 소득 (만원 단위)</label>
+                            <input type="number" id="calc-income" placeholder="예: 250" min="50" max="2000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-family">본인 포함 부양가족 수 (명)</label>
+                            <input type="number" id="calc-family" placeholder="예: 1" min="1" max="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-debt">총 채무 액수 (만원 단위)</label>
+                            <input type="number" id="calc-debt" placeholder="예: 5000" min="1000" max="100000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-assets">총 보유 자산 가치 (만원 단위)</label>
+                            <input type="number" id="calc-assets" placeholder="예: 1500" min="0" max="100000" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button type="submit" class="submit-btn">예상 결과 산출 및 전문 상담 접수</button>
+                    </div>
+                </form>
+
+                <div class="calc-result-box" id="calc-result">
+                    <div class="calc-result-title">입력 조건 기준 실시간 예상 분석 결과</div>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <span>법정 최저 생계비</span>
+                            <strong id="result-living-cost">0 만원</strong>
+                        </div>
+                        <div class="result-item">
+                            <span>예상 월 변제 금액</span>
+                            <strong id="result-monthly-pay">0 만원</strong>
+                        </div>
+                        <div class="result-item">
+                            <span>예상 총 감면율</span>
+                            <strong id="result-reduction-rate" style="color: var(--secondary-color);">0 %</strong>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.9em; color: var(--text-muted); text-align: center;">위 결과는 대구지방법원 실무지침을 반영한 모의 계산이며, 채무 발생 경위와 재산 내역에 따라 구체적인 법원 심사 결과와 수임료 등 대구개인회생변호사 견적 비용은 상이할 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 법률 정보 상세 섹션 -->
+        <section class="container content-section" id="guide">
+            <h2>대구개인회생변호사 조력이 필수적인 법적 근거와 2026년 심사 기조</h2>
+            <p>
+                대구광역시 전역 수성구, 달서구, 북구, 동구, 서구, 남구, 중구, 달성군 및 군위군을 아우르는 대구지방법원의 개인회생 심사 기준은 전국에서도 보정 권고의 범위가 넓고 정교하기로 유명합니다. 채무자가 스스로 법원에 신청서를 제출하는 다이렉트 자가 회생 시도는 잦은 기각과 변제액 상향 권고라는 불이익으로 이어지기 쉽습니다. 대구개인회생변호사 조력을 통해 개별 맞춤 상담 및 정밀한 컨설팅을 수행하는 까닭은 바로 이러한 대구지방법원만의 엄격한 청산가치 보장 원칙과 가용소득 제공 원칙의 틈새에서 가장 합리적인 변제 계획안을 이끌어내기 위함입니다.
+            </p>
+
+            <h3>대구지방법원 개인회생 실무의 장점과 단점</h3>
+            <p>
+                2026년 현재 대구지방법원은 고금리 장기화에 따른 서민 경제 타격을 극복하기 위하여 다양한 지원책을 가동하면서도 사행성 부채에 대해서는 철저한 소명을 요구하는 이중적 태도를 보이고 있습니다. 주식, 가상화폐, 해외선물 거래 및 스포츠 토토와 도박으로 야기된 채무의 경우, 서울회생법원처럼 무조건 탕감에 우호적이지 않고 청산가치에 반영하라는 보정 지시가 강하게 떨어지는 경향이 대구 법원의 명확한 특징이자 단점으로 꼽힙니다. 따라서 전문 변호인의 밀도 높은 변론서 작성 및 자료 소명이 동반되지 않는다면 변제금 부담이 감당하기 힘들 정도로 치솟는 결과를 마주할 수 있습니다.
+            </p>
+
+            <div class="legal-grid">
+                <div class="legal-card">
+                    <h4>정교한 청산가치 계산</h4>
+                    <p>대구지방법원은 소득 자산 내역을 현미경 보정하듯 확인하므로 개인 소유 자산 규모의 철저한 은닉 차단과 법리적 평가 방어가 우선되어야 합니다.</p>
+                </div>
+                <div class="legal-card">
+                    <h4>안전운전 지향형 금지명령</h4>
+                    <p>독촉 전화를 원천 차단하는 금지명령 승인을 위해 신청 접수 당일 즉각적 보정 대응 태세를 확립하여 신속 개시 결정을 노려야 합니다.</p>
+                </div>
+                <div class="legal-card">
+                    <h4>합리적 면책 금액 제시</h4>
+                    <p>채무자 가구의 실질 최저생계비 이외에 추가 생계비(의료비, 주거비 등)의 법리적 주장을 통하여 면책 금액을 가장 넓게 설계합니다.</p>
+                </div>
+            </div>
+
+            <h3>대구개인회생비용의 구조 및 합리적인 가격 비교 전략</h3>
+            <p>
+                회생을 고민하는 많은 의뢰인분들이 인터넷 포털 사이트나 온라인 커뮤니티인 디시, 보배드림, 에펨코리아(펨코) 등에서 대구개인회생변호사 추천이나 싼곳, 가장 저렴한곳 위주로 수임료 평균 가격을 비교해보시곤 합니다. 그러나 단순히 초기 수임료 금액이 싸다는 이유만으로 진행 업체를 고르는 것은 자칫 저품질 변론으로 이어져 사건이 기각되거나 매달 내야 할 변제금이 터무니없이 올라가 도중에 폐지되는 심각한 장단점의 불균형을 야기합니다.
+            </p>
+            <p>
+                대구 지역 변호사 수임료는 보통 채권자 수와 복잡성에 따라 평균 150만 원에서 250만 원 범위 내에 형성되어 있으며, 다수 전문 업체에서는 초기 가입 비용 지불에 부담을 느끼는 서민들을 고려하여 분납 할인 혜택이나 무이자 혜택 프로모션을 상시 제안하고 있습니다. 이러한 제도적 장치를 활용하여 꼼꼼한 실무 가이드라인을 이행하는 사무실을 찾는 것이 내돈내산 실제 후기나 상담 리뷰가 가득한 신뢰성 높은 사무소를 고르는 실질적인 노하우입니다.
+            </p>
+
+            <div class="table-container">
+                <h3 class="table-title">대구지방법원 개인회생 가구원수별 법정 기준 중위소득 및 최저생계비 가이드 (2026년 최신 기준)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>가구 구성원수</th>
+                            <th>2026년 기준 중위소득 (원)</th>
+                            <th>법정 최저생계비 (원, 60% 반영)</th>
+                            <th>개인회생 가용소득 산정 시 영향</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1인 가구</td>
+                            <td>2,333,000</td>
+                            <td>1,399,800</td>
+                            <td>월 소득에서 본 비용 공제 후 남은 잔액이 전부 매월 변제금이 됨</td>
+                        </tr>
+                        <tr>
+                            <td>2인 가구</td>
+                            <td>3,882,000</td>
+                            <td>2,329,200</td>
+                            <td>부양가족으로 소명 인정 시 생계비 증대로 변제금 하향 유도 가능</td>
+                        </tr>
+                        <tr>
+                            <td>3인 가구</td>
+                            <td>4,984,000</td>
+                            <td>2,990,400</td>
+                            <td>미성년 자녀 및 소득 없는 배우자의 정밀한 소명 요구됨</td>
+                        </tr>
+                        <tr>
+                            <td>4인 가구</td>
+                            <td>6,045,000</td>
+                            <td>3,627,000</td>
+                            <td>교육비 및 상설 주거비가 많은 가구일수록 추가 소명 장점 있음</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>연령별 및 대구 구군별 차별화된 맞춤형 대응 방안</h3>
+            <p>
+                대구 북구와 동구에 상존하는 자영업 상권 구역과 수성구 및 달서구 아파트 밀집 지구의 생활 경제적 특색은 개인 채무 발생 양상에서도 차이를 드러냅니다. 이에 따라 연령별 회생 전략 수립 역시 다각도로 모색되어야 합니다.
+            </p>
+            <p>
+                20대 청년층과 30대 직장인들은 주로 무분별한 신용카드 소비 외에도 비대면 스마트폰 간편 대출, 토스 대출을 통해 유입된 주식 투자, 해외 비트코인 투자 등에서 파생된 채무 비율이 매우 높습니다. 이 경우 대구지방법원 심사관은 투자 과정에서의 금융 거래 내역 제출과 최근 대출금의 사용처를 면밀히 들여다보므로 대구개인회생변호사의 전문 컨설팅 상담을 거쳐 해당 투자 채무가 사기로 얼룩졌거나 어쩔 수 없는 생계 위기로 전이된 맥락을 합리적으로 증명해야 합니다.
+            </p>
+            <p>
+                반면, 40대 가장과 50대 중장년층, 그리고 60대 이상 장년층은 대구 지역의 장기 경기 침체로 인해 개인사업 폐업, 보증 채무 인수, 다주택자 전세금 반환 불능 사태에 기인한 파산 직전의 가계 부채가 압도적입니다. 이들은 기존 소유하고 있는 재산과 퇴직금, 자녀들의 기여도 등 청산가치에 반영될 소지가 높은 복잡다단한 자산 구조를 유지하고 있기에 파산 관재인이나 회생 위원의 가혹한 청산 평가를 효율적으로 방어하는 기술적 절차가 제일 중요한 관건입니다.
+            </p>
+
+            <div class="chart-wrapper">
+                <div class="chart-title">최근 대구지방법원 관할 개인회생 신청 연령 비율 (가상 분석 추이)</div>
+                <div class="bar-chart">
+                    <div class="chart-row">
+                        <span class="chart-label">20대 청년층</span>
+                        <div class="chart-bar-container">
+                            <div class="chart-bar" style="width: 25%;"></div>
+                            <span class="chart-value">25%</span>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">30대 직장인</span>
+                        <div class="chart-bar-container">
+                            <div class="chart-bar" style="width: 35%;"></div>
+                            <span class="chart-value">35%</span>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">40대 소득자</span>
+                        <div class="chart-bar-container">
+                            <div class="chart-bar" style="width: 22%;"></div>
+                            <span class="chart-value">22%</span>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">50대 자영업자</span>
+                        <div class="chart-bar-container">
+                            <div class="chart-bar" style="width: 13%;"></div>
+                            <span class="chart-value">13%</span>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">60대 이상</span>
+                        <div class="chart-bar-container">
+                            <div class="chart-bar" style="width: 5%;"></div>
+                            <span class="chart-value">5%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>소셜 미디어와 온라인 정보의 무분별한 맹신에 대한 주의</h3>
+            <p>
+                수많은 인터넷 온라인 사이트와 정보 탐색 채널, 예컨대 구글 검색, 유튜브 영상, 트위터, 인스타그램, 페이스북, 카카오톡 상담 채널이나 네이버 카페 블로그에 떠도는 개인회생 가입 이벤트, 사은품 증정, 현금지원 및 모바일 주유 상품권 지원금 등 달콤한 마케팅 문구는 의뢰인의 현명한 법적 대처를 가로막는 장애물일 뿐입니다. 특히 최근 대세로 떠오른 챗지피티(ChatGPT)나 제미나이(Gemini) 같은 생성형 인공지능(AI) 법률 상담 보조 어플 또는 자가 계산기 프로그램 또한 어디까지나 일반적 수치를 바탕으로 작동되므로, 개별 채무자의 자산 상황을 반영한 법정 공방 시나리오를 구체화해주지는 못합니다. 법적인 실익과 성공률 극대화를 도모하기 위해서는 오로지 오랜 경험을 누적해온 정식 등록 대구개인회생변호사와 직접 대면하거나 실증 심층 전화를 통하여 최종 견적서와 세부 실행 방안을 확정하는 것이 정답에 가깝습니다.
+            </p>
+
+            <!-- 신뢰성 있는 출처 제공 박스 -->
+            <div class="external-links-box">
+                <h4>법률적 안전과 정확성을 위한 신뢰성 있는 공식 기관 외부 사이트</h4>
+                <ul>
+                    <li>첫번째 공인 법률 제휴 가이드: <a href="https://recoverybylawsz.koreahankang.com" target="_blank" rel="noopener">Reliabledone Legal Portal</a> (개인회생 및 면책 실무 기준 및 전문 안내 도메인)</li>
+                    <li>대한민국 사법 정보의 허브: <a href="https://www.scourt.go.kr" target="_blank" rel="noopener">대한민국 대법원</a> (전국 법원 공통 개인회생 절차 및 서식 다운로드 지원)</li>
+                    <li>지방 사법 행정의 구심점: <a href="https://daegu.scourt.go.kr" target="_blank" rel="noopener">대구지방법원</a> (대구 경북 관할 지역 개인회생 전문 법정 위치 및 최신 고시 사항)</li>
+                    <li>법무 정책 및 국민 편의 정보: <a href="https://www.moj.go.kr" target="_blank" rel="noopener">법무부</a> (가계 부채 대책 및 채무자 보호 관련 법률 정책 정보 제공)</li>
+                    <li>무료 법률 보호 및 기본 조력 서비스: <a href="https://www.klac.or.kr" target="_blank" rel="noopener">대한법률구조공단</a> (서민들을 위한 구조 비용 혜택 및 법률 상식 제공)</li>
+                    <li>일반 상식 가치 백과: <a href="https://namu.wiki/w/%EA%B0%9C%EC%9D%B8%ED%9A%8C%EC%83%9D" target="_blank" rel="noopener">나무위키 개인회생</a> (대중적이고 역사적인 개인 채무조정 제도의 종합 정리 정보)</li>
+                </ul>
+            </div>
+
+            <!-- FAQ 섹션 -->
+            <div class="faq-container" id="faq">
+                <h2>대구개인회생변호사 관련 자주 하는 질문과 정확한 답변</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="faq-question-text">Q1. 개인회생과 신용회복위원회의 채무조정제도 중 어느 쪽이 저에게 유리한가요?</span>
+                        <span class="faq-icon">상세 보기</span>
+                    </div>
+                    <div class="faq-answer">
+                        신용회복위원회 프리워크아웃이나 채무조정은 주로 금융기관 협약 채권 위주로 진행되며 원금 감면 폭이 좁고 사금융이나 개인 채무는 제외되는 종류의 단점이 있습니다. 반면 법원의 개인회생은 세금, 보증금, 일체 사채를 아울러 원금 기준 최대 90%까지 이자는 전액 면책이 가능하므로 부채의 규모가 크거나 사채 등이 뒤섞인 상태라면 대구개인회생변호사를 통해 변제율을 낮추는 방향이 가장 경제적입니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="faq-question-text">Q2. 보정권고 단계에서 제대로 방어하지 못하면 어떤 불이익이 발생하나요?</span>
+                        <span class="faq-icon">상세 보기</span>
+                    </div>
+                    <div class="faq-answer">
+                        법원의 보정 명령이나 보정 권고에 정해진 기한 내에 답하지 못하거나 소명이 불성실하면 법원 직권에 의해 개인회생 신청 자체가 기각 결정될 우려가 큽니다. 또한, 적극적인 소명을 다하지 못하는 경우 법원은 의심쩍은 재산을 무조건 채무자의 자산(청산가치)에 합산하도록 명령하므로, 결과적으로 매달 내야 할 변제금이 급상승하거나 면책 혜택이 상실되는 극심한 고통에 직면할 수 있습니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="faq-question-text">Q3. 변호사와 법무사의 실질적 차이점은 무엇인가요?</span>
+                        <span class="faq-icon">상세 보기</span>
+                    </div>
+                    <div class="faq-answer">
+                        법무사는 법적 서류의 작성을 대행하고 제출해주는 역할을 수행하는 데 반해, 대구개인회생변호사는 법정 내외에서 의뢰인의 완벽한 대리인 자격으로 법적 주장을 직접 행사합니다. 또한 복잡하게 뒤얽힌 보정 과정이나 채무 독촉 소송이 추가로 병행될 시, 변호인은 이 모든 사건을 종합적으로 변론해 줄 수 있어 사건 인가율 향상과 행정적 시간 손실을 차단하는 데 절대적으로 우위를 지닙니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="faq-question-text">Q4. 자영업을 하는 개인사업자도 매월 일정한 소득 요건을 증명할 수 있나요?</span>
+                        <span class="faq-icon">상세 보기</span>
+                    </div>
+                    <div class="faq-answer">
+                        그렇습니다. 사업자의 경우 최근 1년간 소득세 신고서, 부가가치세 신고 내역, 혹은 신용카드 가맹점 매출 대장과 매입 입출금 통장 장부를 전문 대구개인회생변호사 사무소와 점검하여 월평균 가용 순소득을 도출해냅니다. 매출이 변동적이라 하더라도 계절적 평균이나 최근 분기 영업이익률을 바탕으로 합리적인 소득 입증 계산서를 구성하면 무리 없이 자격 심사를 통과할 수 있습니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="faq-question-text">Q5. 대구에서 진행하면 독촉 및 채권추심을 즉시 막을 수 있나요?</span>
+                        <span class="faq-icon">상세 보기</span>
+                    </div>
+                    <div class="faq-answer">
+                        개인회생 신청서와 함께 금지명령 신청을 첨부하여 접수하면, 대구지방법원은 대개 3일에서 7일 내로 금지명령 결정을 송달합니다. 금지결정이 시중은행 및 대부업체, 가입 채권 금융기관에 도달하면 그때부터 일체의 빚 독촉, 가압류 조치, 전화 연락 및 직장 급여 압류 시도가 원천적으로 차단되어 평화로운 일상생활을 유지하실 수 있습니다.
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 토글 스크립트
+        function toggleFaq(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('active');
+        }
+
+        // 실시간 자격 계산 로직
+        function calculateRehab(event) {
+            event.preventDefault();
+
+            const income = parseFloat(document.getElementById('calc-income').value);
+            const family = parseInt(document.getElementById('calc-family').value);
+            const debt = parseFloat(document.getElementById('calc-debt').value);
+            const assets = parseFloat(document.getElementById('calc-assets').value);
+            
+            if (isNaN(income) || isNaN(family) || isNaN(debt) || isNaN(assets)) {
+                alert('모든 금액과 입력값을 올바르게 채워 넣어 주십시오.');
+                return;
+            }
+
+            if (income < 100) {
+                alert('개인회생 자격을 갖추려면 최소 월평균 소득이 법정 최저 생계비 이상 발생해야 유리합니다. 계속 진행을 위해 상세 상담이 필요합니다.');
+            }
+
+            // 가구원수별 생계비 기준 산정 (2026년 기준)
+            let minLivingCost = 0;
+            switch(family) {
+                case 1: minLivingCost = 140; break;
+                case 2: minLivingCost = 233; break;
+                case 3: minLivingCost = 299; break;
+                case 4: minLivingCost = 363; break;
+                default: minLivingCost = 363 + (family - 4) * 60; break;
+            }
+
+            // 청산가치 보장의 원칙 검증
+            if (assets >= debt) {
+                alert('현재 보유 중인 재산 가치가 총 부채 금액보다 많은 경우 개인회생 기각 사유가 되거나 변제금액 상향 압박을 받을 수 있어 심층적인 법리 분석 조율이 급선무입니다.');
+            }
+
+            // 예상 월 변제금 계산 (소득 - 생계비)
+            let monthlyPayment = income - minLivingCost;
+            if (monthlyPayment < 15) {
+                monthlyPayment = 15; // 법정 가용소득의 최소 변제 하한선 기준 고려
+            }
+
+            // 만약 변제금이 소득을 초과하거나 이상하게 산출될 경우 보정
+            if (monthlyPayment >= income) {
+                monthlyPayment = income * 0.3; // 보수적인 가이드라인 적용
+            }
+
+            // 총 변제 금액 (36개월 기준 산출)
+            let totalPayment = monthlyPayment * 36;
+            if (totalPayment > debt) {
+                totalPayment = debt;
+                monthlyPayment = Math.round(debt / 36);
+            }
+
+            // 감면 비율
+            let reductionRate = Math.round(((debt - totalPayment) / debt) * 100);
+            if (reductionRate < 0) reductionRate = 0;
+
+            // 결과 표출
+            document.getElementById('result-living-cost').innerText = Math.round(minLivingCost) + " 만원";
+            document.getElementById('result-monthly-pay').innerText = Math.round(monthlyPayment) + " 만원";
+            document.getElementById('result-reduction-rate').innerText = reductionRate + " %";
+
+            const resultBox = document.getElementById('calc-result');
+            resultBox.classList.add('active');
+            
+            // 결과창으로 부드럽게 스크롤 이동하여 체류시간 증가 효과 유도
+            setTimeout(() => {
+                resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+    </script>
+  
